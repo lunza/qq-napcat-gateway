@@ -1,0 +1,15 @@
+{
+  "name": "qq-bot-gateway",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "[2026-11-12] QQ 账号机器人：NapCat(协议端) + harness 托管的 gateway",
+  "scripts": {
+    "start": "node --experimental-strip-types gateway/src/main.ts",
+    "once": "node --experimental-strip-types gateway/src/main.ts --once",
+    "report": "node --experimental-strip-types gateway/src/main.ts --report"
+  },
+  "dependencies": {
+    "ws": "^8.22.2"
+  }
+}

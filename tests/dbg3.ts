@@ -1,0 +1,18 @@
+import http from 'node:http';
+import { WebSocketServer } from 'ws';
+import { spawn } from 'node:child_process';
+import fs from 'node:fs';
+const LOG = '/tmp/dbg3.log';
+const log = (m: string) => fs.appendFileSync(LOG, m + '\n');
+log('start');
+const httpServer = http.createServer((q, s) => s.end('ok'));
+await new Promise<void>(r => httpServer.listen(39030, '127.0.0.1', () => { log('http ok'); r(); }));
+const wss = new WebSocketServer({ port: 39031, host: '127.0.0.1' });
+let sock: any = null;
+await new Promise<void>(r => wss.on('connection', (s) => { sock = s; log('conn'); r(); }));
+log('after wss await');
+const gw = spawn(process.execPath, ['--experimental-strip-types', 'gateway/src/main.ts', '--once'], { env: { ...process.env, QQBOT_CONFIG: '/nonexistent' } });
+gw.on('exit', c => { log('gw exit ' + c); });
+await new Promise(r => setTimeout(r, 3000));
+log('done sock=' + !!sock);
+process.exit(0);

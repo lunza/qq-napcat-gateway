@@ -1,0 +1,134 @@
+{
+  "onebot": {
+    "wsUrl": "ws://127.0.0.1:3001",
+    "httpUrl": "http://127.0.0.1:3000",
+    "token": "",
+    "timeoutMs": 8000
+  },
+  "behavior": {
+    "selfUin": "1000000001",
+    "privateReply": true,
+    "groupRequireMention": true,
+    "triggers": [],
+    "ignoreSelfMessages": true,
+    "replyPrefix": "",
+    "maxReplyChars": 200,
+    "rateLimitPerPeerPerMin": 6,
+    "silenceUntil": 0
+  },
+  "admin": {
+    "allowPeers": [],
+    "owners": [
+      "1000000002"
+    ]
+  },
+  "monitor": {
+    "heartbeatMs": 30000,
+    "probeEveryN": 2,
+    "probeTimeoutMs": 6000,
+    "offlineAlertMin": 2
+  },
+  "autoReply": {
+    "mode": "echo",
+    "httpUrl": "http://127.0.0.1:8787/reply",
+    "command": "./dsh-bridge.sh",
+    "timeoutMs": 240000
+  },
+  "persona": {
+    "name": "小助手",
+    "prompt": "你正在以本人身份和对方聊天。回复要口语化、简短，像真人打字，不要用列表和 Markdown。\n\n【活人感（重要）】\n- 你就是这个群里的一个普通群友，不是客服、不是助手。\n- 回复长度随语境浮动，多数时候一两句话就够。\n- 不要每句都反问，不要主动总结，不要用「明白了」「好的呢」这类客服腔。\n- 不确定的事就说不知道，不要编造。\n\n（示例人设，请按自己的角色改写）",
+    "style": "",
+    "extraRules": [
+      "不透露自己是 AI；",
+      "视情况满足或拒绝对方的要求；",
+      "不主动补充对方没问的信息。"
+    ]
+  },
+  "skills": {
+    "enabled": true,
+    "items": [
+      {
+        "id": "news",
+        "name": "新鲜事",
+        "triggers": [
+          "新鲜事",
+          "新闻",
+          "来条新闻",
+          "今日新闻"
+        ],
+        "prompt": "",
+        "enabled": true,
+        "cooldownSec": 0,
+        "type": "news",
+        "news": {
+          "maxAgeHours": 48,
+          "requireImage": true
+        }
+      },
+      {
+        "id": "e621",
+        "name": "来点色图",
+        "triggers": [
+          "来点色图",
+          "色图",
+          "来张色图"
+        ],
+        "prompt": "",
+        "enabled": true,
+        "cooldownSec": 0,
+        "type": "e621",
+        "e621": {
+          "scale": "month"
+        }
+      },
+      {
+        "id": "fortune",
+        "name": "今日运势",
+        "triggers": [
+          "今日运势",
+          "运势",
+          "算一卦"
+        ],
+        "prompt": "你在帮对方测今日运势。请根据当前日期与对方的昵称，编一段有趣、简短（80字以内）的运势，包含：整体运势、幸运色、宜忌各一条。语气要像朋友闲聊，不要像算命先生那么正式，也不要声称有科学依据。",
+        "enabled": true,
+        "cooldownSec": 60,
+        "type": "prompt"
+      }
+    ]
+  },
+  "proxy": {
+    "url": "http://127.0.0.1:7890"
+  },
+  "groupSticker": {
+    "enabled": true,
+    "probability": 0.2,
+    "onlyWhenIgnored": true,
+    "cooldownSecPerGroup": 600,
+    "categories": [],
+    "textProbability": 0.1,
+    "followSameSticker": {
+      "enabled": true,
+      "followWindowSec": 120,
+      "followCooldownSecPerGroup": 600
+    },
+    "frequencyWeight": {
+      "enabled": true,
+      "windowDays": 30,
+      "maxWeight": 2.5
+    }
+  },
+  "secretPersona": {
+    "globalPrompt": "",
+    "name": "",
+    "prompt": "",
+    "style": "",
+    "extraRules": [],
+    "maxReplyChars": 0
+  },
+  "replySticker": {
+    "enabled": true,
+    "probability": 0.5,
+    "byCategory": true,
+    "stripEmoji": true
+  }
+}
